@@ -1,0 +1,259 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body{
+    height: 100%;
+    width: 100%;
+}
+
+#nav{
+    height: 60px;
+    width: 100%;
+    background-color: rgba(16, 23, 42, 1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    padding: 10px 20px;
+    border: 1px solid rgba(132, 167, 255, 1);
+    box-sizing: border-box;
+    z-index: 1000;
+}
+
+/* #logo{
+
+} */
+
+.nav-section{
+    display: flex;
+    align-items: center;
+}
+
+.left, .right{
+    width: 300px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.center{
+    flex: 1;
+    justify-content: center;
+}
+
+#links{
+    display: flex;
+    /* justify-content: center;
+    flex: 1; */
+}
+
+#links a{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    margin: 0 15px;
+}
+
+#search-container{
+    position: relative;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(16, 23, 42, 1);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    transition: width 0.4s ease;
+    overflow: visible;
+}
+
+#search-container input{
+    position: absolute;
+    right: 0;
+    width: 0;
+    opacity: 0;
+    height: 100%;
+    padding: 0 40px 0 15px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: black;
+    background: white;
+    z-index: 1;
+    border-radius: 20px;
+    transition: width 0.4s ease, opacity 0.3s ease;
+}
+
+/* #search-container .fa{
+    color: white;
+    font-size: 18px;
+    padding-left: 10px;
+    flex-shrink: 0;
+}
+
+#search-container:hover{
+    width: 250px;
+    cursor: pointer;
+}
+
+#search-container:hover input{
+    display: block;
+} */
+
+#search-container.active{
+    width: 250px;
+}
+
+#search-container.active input{
+    width: 250px;
+    opacity: 1;
+}
+
+#search-container .fa{
+    position: absolute;
+    right: 15px;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    transition: color 0.3 ease;
+    z-index: 2;
+}
+
+#search-container.active .fa{
+    color: black;
+}
+
+#user i, #cart i{
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+#main{
+    min-height: 100vh;
+    width: 100%;
+    background-color: rgba(16, 24, 40, 1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+    box-sizing: border-box;
+}
+
+#left{
+    height: 90%;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding-left: 50px;
+    box-sizing: border-box;
+}
+
+#left-top{
+    margin-bottom: 20px;
+}
+
+#left-mid{
+    margin-bottom: 30px;
+}
+
+#left-bottom{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+#left-bottom a{
+    text-decoration: none;
+}
+
+#left-top h3{
+    border: 0;
+    line-height: 3;
+    padding: 0 40px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: rgba(19, 34, 71, 1);
+    color: rgba(65, 152, 232, 1);
+    border-radius: 30px;
+}
+
+#left h1{
+    color: white;
+    font-size: 60px;
+}
+
+#left p{
+    color: white;
+    font-size: 20px;
+    font-weight: normal;
+}
+
+#left h1 span{
+    color: rgba(147, 29, 250, 1);
+    display: block;
+}
+
+#btn-ai{
+    border: 0;
+    line-height: 3.5;
+    padding: 0 148px;
+    font-size: 20px;
+    background-color: rgba(141, 38, 250, 1);
+    color: white;
+    border-radius: 20px;
+    font-weight: bold;
+    display: block;
+}
+
+#btn-row{
+    display: flex;
+    gap: 20px;
+}
+
+#btn-build,
+#btn-pre-build{
+    border: 0;
+    line-height: 3.5;
+    padding: 0 25px;
+    font-size: 20px;
+    background-color: rgba(0, 18, 181, 1);
+    color: white;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+#btn-build{
+    background-color: rgba(0, 18, 181, 1);
+}
+
+#btn-pre-build{
+    background-color: rgba(37, 47, 72, 1);
+}
+
+.btn{
+    transition: transform 0.5s, box-shadow 0.5s;
+}
+
+.btn:hover{
+    transform: scale(1.05);
+}
+
+.btn:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+#right{
+    height: 95%;
+    width: 55%;
+}
+
+#right img{
+    border-radius: 20px;
+}

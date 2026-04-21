@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - PC Builder</title>
+</head>
+<body style="margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; background-color: rgba(16, 23, 42, 1); min-height: 100vh; font-family: Arial, sans-serif;">
+
+    <div style="width: 100%; max-width: 500px; padding: 20px;">
+        <form action="code.php" method="POST" style="display: flex; flex-direction: column; padding: 50px; gap: 15px; border-radius: 10px; background-color: #333741; border: none;">
+            
+            <h2 style="color: white; text-align: center; margin: 0 0 30px 0;">Create Account</h2>
+            
+            <label style="color: white; font-weight: bold;">Username</label>
+            <input type="text" name="username" placeholder="Choose a username" required style="height: 45px; padding: 10px; border: none; border-radius: 5px; font-size: 16px;">
+            
+            <label style="color: white; font-weight: bold;">Email</label>
+            <input type="email" name="email" placeholder="Enter your email" required style="height: 45px; padding: 10px; border: none; border-radius: 5px; font-size: 16px;">
+            
+            <label style="color: white; font-weight: bold;">Password</label>
+            <input type="password" name="password" placeholder="Enter password (min 6 chars)" required minlength="6" style="height: 45px; padding: 10px; border: none; border-radius: 5px; font-size: 16px;">
+            
+            <label style="color: white; font-weight: bold;">Confirm Password</label>
+            <input type="password" name="confirm_password" placeholder="Confirm password" required minlength="6" style="height: 45px; padding: 10px; border: none; border-radius: 5px; font-size: 16px;">
+            
+            <button type="submit" style="padding: 12px; background-color: #9b6cff; border: none; color: white; font-weight: bold; font-size: 1rem; border-radius: 6px; cursor: pointer; margin-top: 20px;">Create Account</button>
+            
+            <div style="text-align: center; margin-top: 20px; color: white;">
+                Already have an account? <a href="login.html" style="color: #9b6cff; text-decoration: none; font-weight: bold;">Login here</a>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

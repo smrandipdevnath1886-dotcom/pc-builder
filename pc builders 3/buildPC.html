@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC Builder - Custom Build</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        #nav {
+            height: 60px;
+            width: 100%;
+            background-color: rgba(16, 23, 42, 1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            padding: 10px 20px;
+            border: 1px solid rgba(132, 167, 255, 1);
+            box-sizing: border-box;
+            z-index: 1000;
+        }
+
+        .nav-section {
+            display: flex;
+            align-items: center;
+        }
+
+        #links a {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        .page {
+            padding-top: 100px;
+            width: 100%;
+            background: #12151f;
+            min-height: 100vh;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .pc_builder {
+            width: 90%;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 30px;
+            padding-bottom: 40px;
+        }
+
+        .available_components {
+            background: rgb(10, 15, 28);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            max-height: 750px;
+            overflow-y: auto;
+        }
+
+        .available_components h3 {
+            margin-bottom: 15px;
+            color: #cbd5e1;
+        }
+
+        .component_item {
+            background: #0f172a;
+            border: 1px solid #334155;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .component_item:hover {
+            background: #1e293b;
+            border-color: #64748b;
+        }
+
+        .component_item h4 {
+            font-size: 14px;
+            color: #e0e7ff;
+        }
+
+        .component_specs {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-top: 5px;
+        }
+
+        .price {
+            color: #38bdf8;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        .your_build {
+            background: #1e293b;
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .your_build h3 {
+            margin-bottom: 20px;
+            color: #cbd5e1;
+        }
+
+        .categories {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 8px 16px;
+            background: #334155;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 13px;
+        }
+
+        .category-btn.active {
+            background: #3b82f6;
+            border: 2px solid #60a5fa;
+        }
+
+        .category-btn:hover {
+            background: #475569;
+        }
+
+        .slot {
+            background: #0f172a;
+            border: 2px dashed #475569;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #94a3b8;
+        }
+
+        .slot.filled {
+            border-style: solid;
+            border-color: #38bdf8;
+        }
+
+        .slot-header {
+            font-weight: bold;
+            color: #cbd5e1;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .selected_item {
+            flex: 1;
+        }
+
+        .selected_item strong {
+            color: #38bdf8;
+            display: block;
+        }
+
+        .selected_item small {
+            color: #94a3b8;
+            font-size: 12px;
+        }
+
+        .remove-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        .remove-btn:hover {
+            background: #dc2626;
+        }
+
+        .summary_section {
+            margin-top: 20px;
+            grid-column: span 2;
+            display: flex;
+            gap: 20px;
+        }
+
+        .summary_box, .compatibility_box {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 12px;
+            flex: 1;
+            border: 1px solid #334155;
+        }
+
+        .summary_box h3, .compatibility_box h3 {
+            margin-bottom: 15px;
+            color: #cbd5e1;
+        }
+
+        .summary_box p, .compatibility_box p {
+            margin-bottom: 8px;
+            color: white;
+            font-size: 15px;
+        }
+
+        .save-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+            width: 100%;
+            transition: 0.2s;
+        }
+
+        .save-btn:hover {
+            background: #2563eb;
+        }
+
+        .save-btn:disabled {
+            background: #64748b;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="nav">
+        <div class="nav-section left">
+            <h2 style="color: #38bdf8;">PC BUILDER</h2>
+        </div>
+        <div class="nav-section center" id="links">
+            <a href="index.html">Home</a>
+            <a href="buildsuggest.html">Build PC</a>
+            <a href="login.html">Login</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="page">
+        <h1 class="title">Custom PC Builder</h1>
+        <p class="subtitle">Select components to build your perfect PC</p>
+
+        <div class="pc_builder">
+            <!-- Left Panel - Available Components -->
+            <div class="available_components">
+                <h3>Components by Category</h3>
+                <div class="categories" id="categories"></div>
+                <div id="components-list"></div>
+            </div>
+
+            <!-- Right Panel - Build Preview & Summary -->
+            <div>
+                <div class="your_build">
+                    <h3>Your Build</h3>
+                    
+                    <div class="slot-header">CPU</div>
+                    <div class="slot" id="cpu-slot">
+                        <div class="selected_item">CPU - Click to select</div>
+                    </div>
+
+                    <div class="slot-header">GPU</div>
+                    <div class="slot" id="gpu-slot">
+                        <div class="selected_item">GPU - Click to select</div>
+                    </div>
+
+                    <div class="slot-header">RAM</div>
+                    <div class="slot" id="ram-slot">
+                        <div class="selected_item">RAM - Click to select</div>
+                    </div>
+
+                    <div class="slot-header">Storage</div>
+                    <div class="slot" id="storage-slot">
+                        <div class="selected_item">Storage - Click to select</div>
+                    </div>
+
+                    <div class="slot-header">PSU</div>
+                    <div class="slot" id="psu-slot">
+                        <div class="selected_item">PSU - Click to select</div>
+                    </div>
+
+                    <div class="slot-header">Cooler</div>
+                    <div class="slot" id="cooler-slot">
+                        <div class="selected_item">Cooler - Click to select</div>
+                    </div>
+                </div>
+
+                <!-- Summary Section -->
+                <div class="summary_section">
+                    <div class="summary_box">
+                        <h3>Build Summary</h3>
+                        <p>Total Price: <strong id="total-price">$0</strong></p>
+                        <p>Components Selected: <strong id="components-count">0/6</strong></p>
+                        <button class="save-btn" id="save-btn">Save Build</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Component data
+        const components = {
+            CPU: [
+                { name: 'Intel Core i5-13600K', price: 289, specs: '13th Gen, 14 Cores' },
+                { name: 'Intel Core i7-13700K', price: 389, specs: '13th Gen, 16 Cores' },
+                { name: 'AMD Ryzen 5 5600X', price: 199, specs: '6 Cores, 3.7GHz' }
+            ],
+            GPU: [
+                { name: 'NVIDIA RTX 4060 Ti', price: 499, specs: '8GB GDDR6' },
+                { name: 'NVIDIA RTX 4070', price: 799, specs: '12GB GDDR6X' },
+                { name: 'AMD RX 6700 XT', price: 379, specs: '12GB GDDR6' }
+            ],
+            RAM: [
+                { name: 'Corsair Vengeance RGB Pro 32GB', price: 149, specs: 'DDR5, 5600MHz' },
+                { name: 'G.Skill Trident Z5 32GB', price: 159, specs: 'DDR5, 6000MHz' },
+                { name: 'Kingston Fury Beast 32GB', price: 129, specs: 'DDR5, 5600MHz' }
+            ],
+            Storage: [
+                { name: 'Samsung 870 QVO 1TB', price: 79, specs: 'SSD, 560MB/s' },
+                { name: 'WD Blue SN580 1TB', price: 89, specs: 'NVMe, 4150MB/s' },
+                { name: 'Crucial P5 Plus 1TB', price: 99, specs: 'NVMe, 6600MB/s' }
+            ],
+            PSU: [
+                { name: 'Corsair RM850x 850W', price: 129, specs: '80+ Gold, Modular' },
+                { name: 'EVGA SuperNOVA 750G2', price: 99, specs: '80+ Gold, 750W' },
+                { name: 'Seasonic Focus 650W', price: 89, specs: '80+ Gold, 650W' }
+            ],
+            Cooler: [
+                { name: 'Noctua NH-D15', price: 99, specs: 'Air Cooler, 150mm' },
+                { name: 'ASUS ROG STRIX LC 360', price: 179, specs: 'Liquid Cooler, 360mm' },
+                { name: 'be quiet! Dark Rock Pro 4', price: 89, specs: 'Air Cooler, 135mm' }
+            ]
+        };
+
+        // State management
+        let build = {
+            CPU: null,
+            GPU: null,
+            RAM: null,
+            Storage: null,
+            PSU: null,
+            Cooler: null
+        };
+
+        let totalPrice = 0;
+
+        // Initialize
+        function init() {
+            renderCategories();
+            renderComponentsList('CPU');
+            attachSlotListeners();
+        }
+
+        // Render category buttons
+        function renderCategories() {
+            const categoriesContainer = document.getElementById('categories');
+            categoriesContainer.innerHTML = '';
+
+            Object.keys(components).forEach(category => {
+                const btn = document.createElement('button');
+                btn.className = `category-btn ${category === 'CPU' ? 'active' : ''}`;
+                btn.textContent = category;
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    renderComponentsList(category);
+                });
+                categoriesContainer.appendChild(btn);
+            });
+        }
+
+        // Render components list
+        function renderComponentsList(category) {
+            const list = document.getElementById('components-list');
+            list.innerHTML = `<h3>${category}</h3>`;
+
+            components[category].forEach(component => {
+                const item = document.createElement('div');
+                item.className = 'component_item';
+                item.innerHTML = `
+                    <h4>${component.name}</h4>
+                    <div class="component_specs">${component.specs}</div>
+                    <div class="price">$${component.price}</div>
+                `;
+                item.addEventListener('click', () => {
+                    selectComponent(category, component);
+                });
+                list.appendChild(item);
+            });
+        }
+
+        // Select component
+        function selectComponent(category, component) {
+            build[category] = component;
+            updateBuild();
+            updateSlot(category);
+        }
+
+        // Update slot display
+        function updateSlot(category) {
+            const slot = document.getElementById(`${category.toLowerCase()}-slot`);
+            const component = build[category];
+
+            if (component) {
+                slot.classList.add('filled');
+                slot.innerHTML = `
+                    <div class="selected_item">
+                        <strong>${component.name}</strong>
+                        <small>${component.specs}</small>
+                    </div>
+                    <button class="remove-btn" onclick="removeComponent('${category}')">Remove</button>
+                `;
+            } else {
+                slot.classList.remove('filled');
+                slot.innerHTML = `<div class="selected_item">${category} - Click to select</div>`;
+            }
+        }
+
+        // Remove component
+        function removeComponent(category) {
+            build[category] = null;
+            updateBuild();
+            updateSlot(category);
+        }
+
+        // Update build summary
+        function updateBuild() {
+            totalPrice = 0;
+            let count = 0;
+
+            Object.values(build).forEach(component => {
+                if (component) {
+                    totalPrice += component.price;
+                    count++;
+                }
+            });
+
+            document.getElementById('total-price').textContent = `$${totalPrice}`;
+            document.getElementById('components-count').textContent = `${count}/6`;
+
+            const saveBtn = document.getElementById('save-btn');
+            saveBtn.disabled = count < 6;
+        }
+
+        // Attach slot click listeners
+        function attachSlotListeners() {
+            Object.keys(build).forEach(category => {
+                const slot = document.getElementById(`${category.toLowerCase()}-slot`);
+                if (slot && build[category] === null) {
+                    slot.addEventListener('click', () => {
+                        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                        document.querySelector(`[data-category="${category}"]`)?.classList.add('active');
+                        renderComponentsList(category);
+                    });
+                }
+            });
+        }
+
+        // Save build
+        document.getElementById('save-btn').addEventListener('click', () => {
+            alert(`Build saved! Total: $${totalPrice}`);
+            // Add API call to save build to database
+        });
+
+        // Start app
+        init();
+    </script>
+</body>
+</html>
